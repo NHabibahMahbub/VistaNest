@@ -32,8 +32,6 @@ class Platform(models.Model):
         return f"{self.title} in {self.location}"
 
 
-
-
 class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Platform, on_delete=models.CASCADE, related_name='bids')
@@ -49,3 +47,12 @@ class Bid(models.Model):
         return f"Bid of {self.amount} on {self.property} by {self.user}"
 
 
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    property = models.ForeignKey(Platform, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        unique_together = ('user', 'property')
