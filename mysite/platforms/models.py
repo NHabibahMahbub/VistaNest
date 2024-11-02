@@ -52,7 +52,7 @@ class Favorite(models.Model):
     property = models.ForeignKey(Platform, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.property.title
 
     class Meta:
         unique_together = ('user', 'property')
