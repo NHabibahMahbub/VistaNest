@@ -1,5 +1,5 @@
 from django.db.models import Q
-from platforms.models import Platform, Bid
+from platforms.models import Platform, Bid, Favorite
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -124,3 +124,18 @@ def place_bid(request, platform_id):
 
     return render(request, 'forms.html', {'form': form, 'platform': platform})
 
+
+@login_required
+def add_to_favorites(request, platform_id):
+    property_obj = get_object_or_404(Platform, id=platform_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, property=property_obj)
+    if created:
+        message = f"{property_obj.title} has been added to your favorites."
+    else:
+        message = f"{property_obj.title} is already in your favorites."
+    return redirect('favorites')
+
+@login_required
+def favorite_list(request):
+    favorites = Favorite.objects.filter(user=request.user).select_related('property')
+    return render(request, 'favorites.html', {'favorites': favorites})
