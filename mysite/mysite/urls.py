@@ -31,6 +31,9 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('place-bid/<int:platform_id>/', views.place_bid, name='place_bid'),
     path('platforms/', include('platforms.urls')),
+    path('favorites/add/<int:platform_id>/', views.add_to_favorites, name='add_to_favorites'),
+    path('favorites/', views.favorite_list, name='favorites'),
+    path('unfavorite/<int:property_id>/', views.unfavorite_property, name='unfavorite_property'),
 ]
 
 if settings.DEBUG:
