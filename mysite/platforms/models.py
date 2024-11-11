@@ -56,3 +56,25 @@ class Favorite(models.Model):
 
     class Meta:
         unique_together = ('user', 'property')
+
+
+
+
+# Model to store favorite properties
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    property = models.ForeignKey(Platform, on_delete=models.CASCADE)
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.property.title}"
+
+# Model to store saved searches
+class SavedSearch(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    search_criteria = models.JSONField()  # Stores search filters like location, price range, etc.
+    search_name = models.CharField(max_length=100)
+    saved_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.search_name}"
