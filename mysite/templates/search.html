@@ -3,55 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <title>VistaNest</title>
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        /* Custom Button Styles */
+        .btn-primary-custom {
+            background-color: #5C6BC0;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            background-color: #3F51B5;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+        .btn-info-custom {
+            background-color: #26C6DA;
+            color: white;
+            border-radius: 25px;
+            padding: 8px 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-info-custom:hover {
+            background-color: #00ACC1;
+        }
+
+        /* Custom Alert Style for No Results */
+        .no-results-alert {
+            background-color: #E1F5FE;  /* Soothing Light Blue */
+            color: #0288D1;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
+        /* Card Layout for Search Results */
+        .search-result-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .search-result-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .card-body {
+            padding: 15px;
+        }
+
+        /* Image Styling */
+        .result-image {
+            width: 100%;       /* Makes sure the image takes up the full width of the container */
+            height: 200px;     /* Fixed height for all images */
+            object-fit: cover; /* Ensures the image covers the area without distorting */
+            border-radius: 8px; /* Rounded corners for the images */
+            margin-bottom: 15px;
+        }
+
+        /* Custom Form Styling */
+        .search-form {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
- <!-- Navbar -->
-   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">VistaNest -- A Real Estate Listing Platform</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'home' %}">VistaNest -- A Real Estate Listing Platform</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'search' %}">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'favorites' %}">Favorite</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
- <br>
- <br>
-  <br>
-    <!-- Render the search form -->
-    <form method="get" action="{% url 'search' %}" align = 'center'>
-        {{ form.as_p }}
-        <button type="submit">Search</button>
-    </form>
-    <h2>Search Results</h2>
+    <div class="container mt-5 pt-5">
+        <!-- Search Form -->
+        <div class="search-form text-center">
+            <form method="get" action="{% url 'search' %}">
+                <h4>Find Your Dream Property</h4>
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary-custom">Search</button>
+            </form>
+        </div>
 
+        <h2 class="text-center mt-5">Search Results</h2>
 
-    {% if results %}
+        {% if results %}
+            <div class="row">
+                {% for result in results %}
+                    <div class="col-md-4">
+                        <div class="card search-result-card">
+                            <img src="{{ result.image.url }}" alt="{{ result.title }}" class="result-image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ result.title }}</h5>
+                                <p><strong>Type:</strong> {{ result.property_type }}</p>
+                                <p><strong>Location:</strong> {{ result.city }}, {{ result.country }}</p>
+                                <a href="{% url 'details' result.id %}" class="btn btn-info-custom">View details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-results-alert text-center">
+                <i class="fas fa-search fa-4x"></i>
+                <h4>No Results Found</h4>
+                <p>It looks like we couldn't find any properties matching your search. Here are a few suggestions:</p>
+                <ul>
+                    <li>Double-check your search terms and try again.</li>
+                    <li>Try using fewer or broader search filters.</li>
+                    <li>Check for any spelling errors in your search.</li>
+                </ul>
+                <a href="{% url 'home' %}" class="btn btn-primary-custom mt-3">Back to Home</a>
+            </div>
+        {% endif %}
 
+    </div>
 
-        <ul>
-            {% for result in results %}
-                <li>{{ result.title }} - {{ result.property_type }} - {{ result.city }} - {{ result.country }}</li>
-                   <a href="{% url 'details' result.id %}" class="text-blue-500">
-        View details </a>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
-    <br>
-        <a href= "{% url 'home'  %}" class="btn btn-primary"> Back to Home</a>
-
-
-  <!-- Link to Bootstrap JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStv5KS5m7O9x94DS6z3HI3ZlM3z4bO8o6Amv9F4mc7"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-nfwJqRRjVv1jQOogXuoLduXW3IVyjxdR6zSwDRRgd6aFCx8df7f9mqpI6C27hD"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy9G3Bl9/6xgWl1Z5hOu1N1hjVfUrIlto64L0w"
-            crossorigin="anonymous"></script>
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStv5KS5m7O9x94DS6z3HI3ZlM3z4bO8o6Amv9F4mc7" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js" integrity="sha384-nfwJqRRjVv1jQOogXuoLduXW3IVyjxdR6zSwDRRgd6aFCx8df7f9mqpI6C27hD" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy9G3Bl9/6xgWl1Z5hOu1N1hjVfUrIlto64L0w" crossorigin="anonymous"></script>
 </body>
 </html>
