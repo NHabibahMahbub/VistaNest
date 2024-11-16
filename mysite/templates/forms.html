@@ -3,25 +3,99 @@
 {% extends "home.html" %}
 
 {% block content %}
-
 <head>
     <meta charset="UTF-8">
+    <title>Platform Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
 
-    <title>Title</title>
+        .container {
+            width: 100%;
+            max-width: 400px; /* Reduced max-width for a more compact form */
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4A90E2;
+            font-size: 1.3em;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Reduced gap for more compact form */
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #f7f7f7;
+            font-size: 0.9em;
+        }
+
+        form button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background-color: #4A90E2;
+            color: white;
+            margin-bottom: 10px; /* Space between buttons */
+        }
+
+        .btn-submit:hover {
+            background-color: #357ABD;
+        }
+
+        .btn-back {
+            background-color: #28a745; /* Green background */
+            color: white;
+            text-align: center;
+            display: block;
+            font-size: 1em;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .btn-back:hover {
+            background-color: #218838; /* Darker green for hover */
+        }
+
+    </style>
 </head>
+
 <body>
-<b>
- <h1 class="text-4xl text-gray-900"  style="color:Teal; font-family:courier; font-size:200%;">Platform Details</h1></b>
-<div class="container mt-4">
-<form method = "POST" enctype="multipart/form-data">
-<br>
-    {% csrf_token %}
-    <b>
-    {{ form.as_p }}</b>    <br>
-    <button type = "submit" value = "OK" class="btn btn-info"> Submit</button>
-</form>
-    <br>
- <a href="{% url 'home' %}" class= " btn btn-outline-success" >Back to Home</a>
-{% endblock %}
+    <div class="container">
+        <h1>Platform Details</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <b>{{ form.as_p }}</b>
+            </div>
+           <button type="submit" class="btn btn-danger">Submit</button>
+            <a href="{% url 'home' %}" class="btn-back">Back to Home</a>
+        </form>
+    </div>
 </body>
+{% endblock %}
 </html>
