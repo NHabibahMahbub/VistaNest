@@ -1,32 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-{% extends "home.html" %}
-
-{% block content %}
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VistaNest - Delete Platform</title>
 
-    <title>Title</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <style>
+        body {
+            padding-top: 80px; /* Adjust for navbar */
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            padding: 10px 20px;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .delete-btn:hover {
+            background-color: #c0392b;
+            cursor: pointer;
+        }
+        .cancel-btn {
+            background-color: #95a5a6;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            padding: 10px 20px;
+            border: none;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .cancel-btn:hover {
+            background-color: #7f8c8d;
+            cursor: pointer;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #e74c3c;
+        }
+        p {
+            font-size: 1.2em;
+            color: #34495e;
+        }
+        .icon {
+            font-size: 3em;
+            color: #e74c3c;
+        }
+    </style>
 </head>
+
 <body>
-<b>
- <h1 class="text-4xl text-gray-900"  style="color:Teal; font-family:courier; font-size:200%;">Platform Details</h1></b>
-<div class="container mt-4">
 
-<form method = "GET" enctype="multipart/form-data">
-<br>
-    {% csrf_token %}
-    <b>
-    {{ form.as_p }}</b>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="{% url 'home' %}">VistaNest -- A Real Estate Listing Platform</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'search' %}">Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'favorites' %}">Favorite</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-</form>
-    <br>
-    <br>
-    <p>Are you sure you want to delete this platform?</p>
- <a href="{% url 'home' %}" class= " btn btn-outline-success" >Cancel</a>
-      <input type = "submit" name = "Yes">
-{% endblock %}
+
+<div class="container text-center">
+
+    <div class="icon">
+        <i class="fas fa-trash-alt"></i>
+    </div>
+
+    <h1>Delete Platform?</h1>
+    <p>Are you sure you want to delete the platform <strong>{{ cat.name }}</strong>? This action is irreversible.</p>
+
+
+    <form method="POST" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="delete-btn">
+            <i class="fas fa-check-circle"></i> Yes, Delete
+        </button>
+    </form>
+
+
+    <a href="{% url 'home' %}" class="cancel-btn">
+        <i class="fas fa-times-circle"></i> Cancel
+    </a>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStv5KS5m7O9x94DS6z3HI3ZlM3z4bO8o6Amv9F4mc7" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js" integrity="sha384-nfwJqRRjVv1jQOogXuoLduXW3IVyjxdR6zSwDRRgd6aFCx8df7f9mqpI6C27hD" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy9G3Bl9/6xgWl1Z5hOu1N1hjVfUrIlto64L0w" crossorigin="anonymous"></script>
+
 </body>
 </html>
