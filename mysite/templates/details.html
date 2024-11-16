@@ -25,10 +25,10 @@
     <div class="container mt-4">
 
         <h1 style = "font-family: 'Montserrat';" >{{ platform.title }}</h1>
-        <img src="{{ platform.image.url }}" alt="Property Image" align= "right" class="bordered-image"  style="max-width: 50%; height: 50%;  border: 3px solid black;  border-radius: 15px; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); ">
-         <p><strong>Owner's Contact Number: </strong> {{ platform.owner_contact_number }}</p>
+        <img src="{{ platform.image.url }}" alt="Property Image" align= "right" class="bordered-image"  style="max-width: 50%; height: 50%;  border: 3px solid black;  border-radius: 15px; box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); "> <br>
+        <p><strong>Owner's Contact Number: </strong> {{ platform.owner_contact_number }}</p>
         <p><strong>Property Type: </strong> {{ platform.property_type }}</p>
-         <p><strong>Property Description: </strong> {{ platform.description }}</p>
+        <p><strong>Property Description: </strong> {{ platform.description }}</p>
         <p><strong>Price: BDT </strong> {{ platform.price }}</p>
         <p><strong>Size: </strong> {{ platform.size_sqft }} sqft</p>
         <p><strong>Year Built: </strong> {{ platform.year_built }}</p>
@@ -38,7 +38,7 @@
         <p><strong>Listed Date: </strong> {{ platform.listed_date }}</p>
 
 
-      
+      <a href="{% url 'add_to_favorites' platform.id %}">Save to Favorites</a>
         <br> <br>
         <h2 style = "font-family: 'Montserrat';"><b>Bids Details</b></h2>
     <div id="bids">

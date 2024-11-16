@@ -139,3 +139,9 @@ def add_to_favorites(request, platform_id):
 def favorite_list(request):
     favorites = Favorite.objects.filter(user=request.user).select_related('property')
     return render(request, 'favorites.html', {'favorites': favorites})
+
+@login_required
+def unfavorite_property(request, property_id):
+    favorite = get_object_or_404(Favorite, user=request.user, property_id=property_id)
+    favorite.delete()  # Remove the favorite property
+    return redirect('favorites')
