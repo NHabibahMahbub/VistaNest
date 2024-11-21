@@ -142,7 +142,7 @@
             <p class="text-muted"><strong>Location:</strong> {{ i.location }}</p>
             <p class="text-muted"><strong>Price:</strong> BDT {{ i.price }}</p>
             <div class="d-flex flex-wrap">
-                <a href="{% url 'details' i.id %}" class="btn btn-outline-primary btn-sm mr-2">Details</a>
+                <a href="{% url 'details' i.id %}" class="btn btn-outline-primary btn-sm mr-2">Inspect</a>
                 <a href="{% url 'place_bid' i.id %}" class="btn btn-outline-warning btn-sm mr-2">Bid Now</a>
                 <a href="{% url 'add_to_favorites' i.id %}" class="btn btn-outline-success btn-sm mr-2">Save to Favorites</a>
                 {% if request.user.is_staff %}
@@ -158,7 +158,7 @@
 
 <!-- Footer -->
 <footer>
-    <p>&copy; 2024 VistaNest - All Rights Reserved</p>
+    <p>&copy; 2024 VistaNest</p>
 </footer>
 
 <!-- Scripts -->
