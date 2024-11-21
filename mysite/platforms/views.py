@@ -1,5 +1,5 @@
 from .models import Platform
-from django.shortcuts import render, redirect, get_list_or_404
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from . import forms
 from .models import Platform
 from django.contrib.auth.decorators import login_required
@@ -34,8 +34,12 @@ def update_platform(request, p_id):
 
 
 def delete_platform(request, p_id):
-    Platform.objects.get(pk=p_id).delete()
-    return redirect("home")
+    platform = get_object_or_404(Platform, pk=p_id)
+    if request.method == "POST":
+        platform.delete()
+        return redirect("home")
+    return render(request, "delete.html", {"cat": platform})
+
 
 
 @login_required(login_url='login')
