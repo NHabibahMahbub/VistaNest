@@ -19,3 +19,18 @@ class BidForm(forms.ModelForm):
     class Meta:
         model = Bid
         fields = ['amount']
+
+
+
+
+# platforms/forms.py
+from django import forms
+from .models import Platform
+
+class ComparisonForm(forms.Form):
+    properties = forms.ModelMultipleChoiceField(
+        queryset=Platform.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+        label="Select Properties for Comparison"
+    )
