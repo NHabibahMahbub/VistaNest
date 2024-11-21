@@ -49,6 +49,12 @@
             background-color: #e9ecef;
             color: #343a40;
         }
+        .table img {
+        max-width: 200px; /* Increased from 100px to 200px */
+        height: auto;
+        border-radius: 8px;
+        }
+
         .button-container {
             text-align: right;
             margin-top: 20px;
@@ -81,6 +87,18 @@
             </thead>
             <tbody>
                 <tr>
+                    <td>Image</td>
+                    {% for property in properties %}
+                        <td>
+                            {% if property.image %}
+                                <img src="{{ property.image.url }}" alt="{{ property.title }}">
+                            {% else %}
+                                <p>No Image Available</p>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <td>Property Type</td>
                     {% for property in properties %}
                         <td>{{ property.property_type }}</td>
@@ -108,6 +126,12 @@
                     <td>Location</td>
                     {% for property in properties %}
                         <td>{{ property.location }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td>City</td>
+                    {% for property in properties %}
+                        <td>{{ property.city }}</td>
                     {% endfor %}
                 </tr>
                 <tr>
