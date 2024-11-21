@@ -87,17 +87,21 @@
                 <a class="nav-link" href="{% url 'favorites' %}">Favorites</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'add-platform' %}">Add Platform</a>
+                <a class="nav-link" href="{% url 'add-platform' %}">Enlist A Nest!</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn btn-outline-light btn-sm" href="{% url 'logout' %}">
-                    <i class="fas fa-sign-out-alt"></i> Log Out
+                <a href="{% url 'logout' %}" class="nav-link text-teal-300" style="font-size: 100%; font-family: Cambria;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="25" viewBox="6 0 18 40">
+                        <title>Log Out</title>
+                        <path d="M3 0h22c0.553 0 1 0 1 0.553l-0 3.447h-2v-2h-20v28h20v-2h2l0 3.447c0 0.553-0.447 0.553-1 0.553h-22c-0.553 0-1-0.447-1-1v-30c0-0.553 0.447-1 1-1z"></path>
+                        <path d="M21.879 21.293l1.414 1.414 6.707-6.707-6.707-6.707-1.414 1.414 4.293 4.293h-14.172v2h14.172l-4.293 4.293z"></path>
+                    </svg>
+                    Log Out
                 </a>
             </li>
         </ul>
     </div>
 </nav>
-
 <!-- Welcome Section -->
 <div class="container text-center my-5">
     <h2>Welcome to VistaNest</h2>
