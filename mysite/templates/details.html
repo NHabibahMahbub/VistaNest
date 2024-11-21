@@ -56,7 +56,10 @@
             <p>User: {{ bid.user.username }}, Amount: BDT{{ bid.amount }}</p>
         {% endfor %}
     </div>
-
+         <br>
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        <a href="{% url 'compare_properties' %}" class="btn btn-secondary ml-2">Compare Properties</a>
+    </div>
         <br>
 
             <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
