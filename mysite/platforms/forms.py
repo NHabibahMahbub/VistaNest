@@ -1,5 +1,5 @@
 from django import forms
-from .models import Platform,  Bid
+from .models import Platform, Bid
 
 
 class PlatformForm(forms.ModelForm):
@@ -15,17 +15,12 @@ class SearchForm(forms.ModelForm):
         model = Platform
         fields = ['query']
 
+
 class BidForm(forms.ModelForm):
     class Meta:
         model = Bid
         fields = ['amount']
 
-
-
-
-# platforms/forms.py
-from django import forms
-from .models import Platform
 
 class ComparisonForm(forms.Form):
     properties = forms.ModelMultipleChoiceField(
