@@ -1,10 +1,9 @@
 from .models import Platform
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404
 from . import forms
-
-from django.shortcuts import get_list_or_404
 from .models import Platform
 from django.contrib.auth.decorators import login_required
+from .forms import ComparisonForm
 
 
 def add_platform(request):
@@ -23,7 +22,7 @@ def add_platform(request):
 def update_platform(request, p_id):
     p = Platform.objects.get(pk=p_id)
     if request.method == "POST":
-        form = forms.PlatformForm(request.POST or None, request.FILES, instance=p )
+        form = forms.PlatformForm(request.POST or None, request.FILES, instance=p)
         if form.is_valid():
             form.save()
             return redirect("home")
@@ -38,20 +37,6 @@ def delete_platform(request, p_id):
     Platform.objects.get(pk=p_id).delete()
     return redirect("home")
 
-
-
-    return render(request, 'select_properties.html', {
-        'form': form
-    })
-
-
-
-
-# platforms/views.py
-from django.shortcuts import render, get_list_or_404
-from .forms import ComparisonForm
-from .models import Platform
-from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def compare_properties(request):
