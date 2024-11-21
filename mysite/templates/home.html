@@ -102,7 +102,10 @@
         </ul>
     </div>
 </nav>
+
+
 <!-- Welcome Section -->
+{% block content %}
 <div class="container text-center my-5">
     <h2>Welcome to VistaNest</h2>
     <p class="text-muted">Discover, bid, and save your favorite platforms.</p>
@@ -125,9 +128,12 @@
         <button type="submit" class="btn btn-outline-success">Sort</button>
     </form>
 </div>
+
+
+
 <!-- Details Section -->
 <div class="container">
-    {% block content %}
+
     {% for i in platform %}
     <div class="card">
         <img src="{{ i.image.url }}" alt="{{ i.title }}">
