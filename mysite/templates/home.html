@@ -144,7 +144,11 @@
 
     {% for i in platform %}
     <div class="card">
-        <img src="{{ i.image.url }}" alt="{{ i.title }}">
+           {% if i.image %}
+                <img src="{{ i.image.url }}" alt="{{ i.title }}">
+            {% else %}
+                <img src="/path/to/default/image.jpg" alt="{{ i.title }}">
+            {% endif %}
         <div class="card-body">
             <h5 class="card-title">{{ i.title }}</h5>
             <p class="text-muted"><strong>Location:</strong> {{ i.location }}</p>
