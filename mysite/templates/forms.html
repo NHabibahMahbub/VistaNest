@@ -16,7 +16,7 @@
 
         .container {
             width: 100%;
-            max-width: 400px; /* Reduced max-width for a more compact form */
+            max-width: 400px;
             margin: 40px auto;
             padding: 20px;
             background-color: #fff;
@@ -34,7 +34,7 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Reduced gap for more compact form */
+            gap: 10px;
         }
 
         form input, form select, form textarea {
@@ -58,7 +58,7 @@
         .btn-submit {
             background-color: #4A90E2;
             color: white;
-            margin-bottom: 10px; /* Space between buttons */
+            margin-bottom: 10px;
         }
 
         .btn-submit:hover {
@@ -66,7 +66,7 @@
         }
 
         .btn-back {
-            background-color: #28a745; /* Green background */
+            background-color: #28a745;
             color: white;
             text-align: center;
             display: block;
@@ -78,7 +78,7 @@
         }
 
         .btn-back:hover {
-            background-color: #218838; /* Darker green for hover */
+            background-color: #218838;
         }
 
     </style>
@@ -92,10 +92,9 @@
             <div>
                 <b>{{ form.as_p }}</b>
             </div>
-           <button type="submit" class="btn btn-danger">Submit</button>
+            <button type="submit" class="btn btn-danger">Submit</button>
             <a href="{% url 'home' %}" class="btn-back">Back to Home</a>
         </form>
     </div>
 </body>
 {% endblock %}
-</html>
