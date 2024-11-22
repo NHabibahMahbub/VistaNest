@@ -7,6 +7,7 @@ class PlatformForm(forms.ModelForm):
         model = Platform
         fields = '__all__'
 
+    image = forms.ImageField(required=False)
 
 class SearchForm(forms.ModelForm):
     query = forms.CharField(label='Search', max_length=100, required=True)
