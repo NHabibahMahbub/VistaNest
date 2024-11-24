@@ -66,6 +66,38 @@
             border-radius: 20px;
         }
 
+
+    .card img {
+        width: 30%; /* Set width to match the images */
+        height: 200px; /* Fixed height for uniformity */
+        object-fit: cover; /* Ensures the image fills the space properly */
+    }
+
+
+    .card img {
+        width: 30%; /* Set width to match the images */
+        height: 200px; /* Fixed height for uniformity */
+        object-fit: cover; /* Ensures the image fills the space properly */
+    }
+
+    .property-placeholder {
+        width: 30%; /* Match width to that of the images */
+        height: 200px; /* Match the height to the images */
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Background gradient for style */
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        text-align: center;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .property-placeholder i {
+        color: #adb5bd;
+    }
+
+
         footer {
             margin-top: 40px;
             padding: 20px;
@@ -144,11 +176,17 @@
 
     {% for i in platform %}
     <div class="card">
-           {% if i.image %}
-                <img src="{{ i.image.url }}" alt="{{ i.title }}">
-            {% else %}
-                <img src="/path/to/default/image.jpg" alt="{{ i.title }}">
-            {% endif %}
+{% if i.image %}
+    <img src="{{ i.image.url }}" alt="{{ i.title }}" class="img-fluid rounded">
+{% else %}
+    <div class="property-placeholder d-flex align-items-center justify-content-center">
+        <i class="fas fa-home fa-5x text-muted"></i>
+    </div>
+{% endif %}
+
+
+
+
         <div class="card-body">
             <h5 class="card-title">{{ i.title }}</h5>
             <p class="text-muted"><strong>Location:</strong> {{ i.location }}</p>
