@@ -25,10 +25,15 @@
             color: #ffc107;
         }
         .property-image {
-            border-radius: 10px;
-            border: 3px solid #ddd;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-        }
+    width: 100%;                  /* Make image take up full width of its container */
+    height: 400px;                /* Fixed height for all images */
+    object-fit: cover;            /* Ensure the image covers the area without distortion */
+    border-radius: 10px;
+    border: 5px solid #000;       /* Black border */
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Optional shadow effect */
+}
+
+
         .info-section {
             background-color: #f8f9fa;
             border-radius: 10px;
@@ -39,16 +44,17 @@
             border-radius: 30px;
             padding: 10px 20px;
         }
-        .property-placeholder {
-            width: 100%;
-            height: 400px; /* Broad height */
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Subtle gradient for elegance */
-            border-radius: 12px;
-            border: 4px solid #ccc; /* Dashed border with softer color */
-            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
-            text-align: center; /* Center align text */
-            position: relative;
-        }
+       .property-placeholder {
+    width: 100%;                  /* Full width */
+    height: 300px;                /* Match the fixed height of the image */
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Subtle gradient for elegance */
+    border-radius: 12px;
+    border: 4px solid #ccc;       /* Dashed border with softer color */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    position: relative;
+}
+
         .property-placeholder i {
             color: #adb5bd;
             transition: transform 0.3s ease; /* Add hover effect for icon */
@@ -56,6 +62,7 @@
         .property-placeholder i:hover {
             transform: scale(1.1); /* Slight zoom on hover */
         }
+
         .property-placeholder p {
             font-size: 1.1rem;
             color: #6c757d; /* Muted yet readable */
@@ -66,6 +73,7 @@
             padding: 8px 20px;
             font-size: 0.9rem;
         }
+
 
         footer {
             background-color: #343a40;
@@ -111,7 +119,7 @@
         <div class="row">
             
             <!-- Property Image -->
-        !-- Property Image -->
+
         <div class="col-md-6 text-center">
             {% if platform.image %}
                 <img src="{{ platform.image.url }}" alt="Property Image" class="img-fluid property-image">
@@ -174,6 +182,9 @@
             <a href="{% url 'home' %}" class="btn btn-primary btn-custom">
                 <i class="fas fa-arrow-left"></i> Back to Home
             </a>
+               <a href="{% url 'place_bid' platform.id %}" class="btn btn-success btn-custom ml-2">
+        <i class="fas fa-gavel"></i> Place Bid
+    </a>
         </div>
     </div>
 
