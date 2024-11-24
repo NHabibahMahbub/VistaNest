@@ -190,6 +190,7 @@
         <div class="card-body">
             <h5 class="card-title">{{ i.title }}</h5>
             <p class="text-muted"><strong>Location:</strong> {{ i.location }}</p>
+             <p class="text-muted"><strong>Type:</strong> {{ i.property_type }}</p>
             <p class="text-muted"><strong>Price:</strong> BDT {{ i.price }}</p>
             <div class="d-flex flex-wrap">
                 <a href="{% url 'details' i.id %}" class="btn btn-outline-primary btn-sm mr-2">Details</a>
