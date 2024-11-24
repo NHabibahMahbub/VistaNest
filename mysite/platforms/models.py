@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+from django.db import models
+from django.contrib.auth.models import User
+
+
 class Platform(models.Model):
     property_type_choices = [
         ('Residential', 'Residential'),
@@ -23,13 +27,13 @@ class Platform(models.Model):
     city = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     listed_date = models.DateField(auto_now_add=True)
-    image = models.ImageField(default='houses.png', blank=True)
 
-
-    # image = models.ImageField()
+    # Default image for when no image is provided
+    image = models.ImageField(upload_to='platform_image/', blank=True, null=True, default='platform_image/houses.png')
 
     def __str__(self):
         return f"{self.title} in {self.location}"
+
 
 
 class Bid(models.Model):
