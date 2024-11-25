@@ -16,9 +16,8 @@ from platforms import forms
 @login_required(login_url='login')
 def home(request):
     platform = Platform.objects.all()
-    print('>>>>>>>>>>>>',Bid.objects.filter(property = platform[0]))
+    print('>>>>>>>>>>>>', Bid.objects.filter(property=platform[0]))
     for i in platform:
-
 
         sort_by = request.GET.get('sort_by', 'title')  # Default sort by 'title'
         sort_order = request.GET.get('sort_order', 'asc')  # Default sort order is ascending
@@ -39,16 +38,18 @@ def signup(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
+
         if not (username and email and password1 and password2):
-            # return HttpResponse("Please fill in all the fields")
             return redirect("signup")
+
         if password1 != password2:
-            # return HttpResponse("Password didn't matched!")
             return redirect("signup")
 
         else:
             my_user = User.objects.create_user(username, email, password1)
             my_user.save()
+            # Log the user in after account creation
+            login(request, my_user)
             return redirect("home")
 
     return render(request, 'signup.html')
@@ -94,16 +95,12 @@ def search(request):
     })
 
 
-
-
 def details(request, property_id):
     platform = get_object_or_404(Platform, pk=property_id)
     bids = platform.bids.all().select_related('user')
     return render(request, 'details.html', {
-    "platform": platform,  'bids': bids,
-  })
-
-
+        "platform": platform, 'bids': bids,
+    })
 
 
 def place_bid(request, platform_id):
@@ -135,10 +132,12 @@ def add_to_favorites(request, platform_id):
         message = f"{property_obj.title} is already in your favorites."
     return redirect('favorites')
 
+
 @login_required
 def favorite_list(request):
     favorites = Favorite.objects.filter(user=request.user).select_related('property')
     return render(request, 'favorites.html', {'favorites': favorites})
+
 
 @login_required
 def unfavorite_property(request, property_id):
