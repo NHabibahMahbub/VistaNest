@@ -1,134 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
-    <style media="screen">
-      *,
-*:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-body{
-    background-color: #34282C;
-}
-.background{
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    left: 50%;
-    top: 50%;
-}
-.background .shape{
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-.shape:first-child{
-    background: linear-gradient(
-        #CCCCFF,
-        #7F4E52
-    );
-    left: -80px;
-    top: -80px;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-.shape:last-child{
-    background: linear-gradient(
-        to right,
-        #E30B5D,
-        #FFB8BF
-    );
-    right: -30px;
-    bottom: -80px;
-}
-form{
-    height: 520px;
-    width: 400px;
-    background-color: rgba(255,255,255,0.13);
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
-}
-form *{
-    font-family: Ahem!, sans-serif;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
-}
-form h3{
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-}
+        body {
+            background: linear-gradient(135deg, #b0bec5, #e8f4fd); /* More grey added to the gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-label{
-    display: block;
-    margin-top: 30px;
-    font-size: 20px;
-    font-weight: 500;
-}
-input{
-    display: block;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(255,255,255,0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 15px;
-    font-weight: 300;
-}
-::placeholder{
-    color: #EEEEEE;
-}
-button{
-    margin-top: 50px;
-    width: 100%;
-    background-color: #FFE4E1;
-    color: #34282C;
-    padding: 15px 0;
-    font-size: 19px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
+        .login-container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-container .icon {
+            font-size: 50px;
+            color: #90caf9; /* Icon color matching the submit button gradient */
+            margin-bottom: 20px;
+        }
+
+        .login-container h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left; /* Left-align the input fields */
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #90caf9;
+            background: white;
+            box-shadow: 0 0 5px rgba(144, 202, 249, 0.5);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background: linear-gradient(135deg, #90caf9, #63a4cc); /* Slightly darker soothing blue gradient */
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #63a4cc, #4f8fbf); /* Darker hover gradient */
+            transform: translateY(-2px); /* Slight hover elevation */
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-footer a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-
+    <div class="login-container">
+        <!-- Shield Icon -->
+        <div class="icon">
+            <i class="fas fa-user-shield"></i>
+        </div>
+        <h3>Welcome Back</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="pass" placeholder="Enter your password" required>
+            </div>
+            <button class="btn" type="submit">Log In</button>
+            <div class="form-footer">
+                <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+            </div>
+        </form>
     </div>
-    <form method="post">
-        {% csrf_token %}
-        <h3>Log in</h3>
-        {% csrf_token %}
-        <label for="username">Username</label>
-        <input type="text" placeholder="Enter Username" id="username" name="username">
-
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="pass">
-        <button type="submit">Log In</button>
-        <br>
-        <br>
-        <a href="{% url 'signup' %}" > Create an account!</a>
-    </form>
 </body>
 </html>
